@@ -1,0 +1,14 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: A Typescript API
+  description: A simple Typescript API
+  contact: 
+    name: Typoon Chuen
+    email: 227108958@stu.vtc.edu.hk
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://typescriptapi--cryingbaby.repl.co'
+    description: Development server
