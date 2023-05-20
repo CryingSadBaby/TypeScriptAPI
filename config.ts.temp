@@ -1,0 +1,11 @@
+const config = {
+  user: '',
+  password: '',
+  host: '',
+  port: 5432,
+  database: ''
+}
+
+
+//export above config for database helpers use
+export { config }
