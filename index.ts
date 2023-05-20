@@ -12,15 +12,12 @@ const app: Koa = new Koa()
 const router: Router = new Router()
 
 //display welcome message function
-const welcomeMessage = async(ctx: RouterContext, next: object) => {
+const welcomeMessage = async(ctx: RouterContext) => {
   ctx.body = {message: 'Welcome to the TypeScript API!'}
-  await next()
 }
 
-const failedMessage = async( ctx: RouterContext, next: object) => {
+const failedMessage = async( ctx: RouterContext) => {
   try {
-    await next()
-    console.log(ctx.status)
     if(ctx.status === 404) {
       ctx.body = {err: 'Resource not found'}
     }
@@ -49,4 +46,5 @@ app.use(router.routes())
 //When status 404
 app.use(failedMessage)
 
+//Start Koa server
 app.listen(10888)
