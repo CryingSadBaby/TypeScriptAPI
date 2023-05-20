@@ -6,6 +6,9 @@ import cors from 'koa-cors'
 import passport from 'koa-passport'
 import Router, {RouterContext} from 'koa-router'
 
+//load routes
+import { router as pets } from './routes/pets'
+
 //create server
 const app: Koa = new Koa()
 //create router
@@ -42,6 +45,7 @@ app.use(passport.initialize())
 
 //Router routes
 app.use(router.routes())
+app.use(pets.routes())
 
 //When status 404
 app.use(failedMessage)
