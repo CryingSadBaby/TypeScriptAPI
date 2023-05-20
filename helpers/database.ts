@@ -1,8 +1,9 @@
 import { Sequelize, QueryTypes } from "sequelize"
 
 //import database setting
-import {config} from '../private/config'
+import { config } from '../private/config'
 
+//function run_query for database query action
 export const run_query = async (query, values) => {
   try{
     const sequelize = new Sequelize(`postgres://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`)
@@ -13,7 +14,7 @@ export const run_query = async (query, values) => {
     })
     await sequelize.close()
     return data
-  } catch (err: any) {
+  } catch (err) {
     console.error(err, query, values)
     throw 'Database query error'
   }
