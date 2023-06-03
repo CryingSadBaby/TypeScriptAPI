@@ -10,6 +10,7 @@ import Router, {RouterContext} from 'koa-router'
 import { router as pets } from './routes/pets'
 import { router as register } from './routes/register'
 import { router as login } from './routes/login'
+import { router as users } from './routes/users'
 
 //create server
 const app: Koa = new Koa()
@@ -50,6 +51,7 @@ app.use(router.routes())
 app.use(pets.routes())
 app.use(register.routes())
 app.use(login.routes())
+app.use(users.routes())
 
 //When status 404
 app.use(failedMessage)

@@ -28,5 +28,6 @@ const getById = async (ctx: RouterContext) => {
 }
 
 router.get('/', getAll)
+router.get('/:id([0-9]{1,})', getById)
 
 export { router }
