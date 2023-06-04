@@ -7,15 +7,11 @@ import passport from 'koa-passport'
 import Router, {RouterContext} from 'koa-router'
 
 //load routes
-import { router as pets } from './routes/pets'
-import { router as register } from './routes/register'
-import { router as login } from './routes/login'
-import { router as users } from './routes/users'
+import { router as articles } from './routes/articles'
+import { router as special } from './routes/special'
 
 //create server
 const app: Koa = new Koa()
-//create router
-const router: Router = new Router()
 
 //display welcome message function
 const welcomeMessage = async(ctx: RouterContext) => {
@@ -32,9 +28,6 @@ const failedMessage = async( ctx: RouterContext) => {
   }
 }
 
-//displayer welcome message on /api/v1 path
-router.get('/api/v1',welcomeMessage)
-
 //load function
 app.use(logger())
 app.use(json())
@@ -47,11 +40,8 @@ app.use(cors())
 app.use(passport.initialize())
 
 //Router routes
-app.use(router.routes())
-app.use(pets.routes())
-app.use(register.routes())
-app.use(login.routes())
-app.use(users.routes())
+app.use(articles.routes())
+app.use(special.routes())
 
 //When status 404
 app.use(failedMessage)

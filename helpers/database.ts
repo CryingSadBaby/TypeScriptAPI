@@ -5,7 +5,7 @@ import { config } from '../private/config'
 
 //function run_query for database query action
 export const run_query = async (query, values) => {
-  try{
+  try {
     const sequelize = new Sequelize(`postgres://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`)
     await sequelize.authenticate()
     const data = await sequelize.query(query, {
