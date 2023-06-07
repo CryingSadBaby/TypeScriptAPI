@@ -1,21 +1,19 @@
-import Router, { RouterContext } from 'koa-router'
+import Router from 'koa-router'
+import bodyParser from 'koa-bodyparser'
+import auth from '../controllers/auth'
 
-//import local file
-import { basicAuth } from '../controllers/auth'
+const router = Router({prefix: '/api/v1'})
 
-const router = new Router({prefix: '/api/v1'})
-
-router.get('/', async(ctx: RouterContext) => {
-  ctx.body = {
-    message: 'Public API return'
-  }
-})
-
-router.get("/private", basicAuth, privateAPI)
-
-function privateAPI(ctx: RouterContext) {
-  const user = ctx.state.user
-  ctx.body = {message: `Hello ${user.user.username} you registered on ${user.user.dateregistered}`}
+function publicAPI(ctx) {
+  ctx.body = {message: 'PUBLIC PAGE: You requested a new message URI (root) of the API'}
 }
 
-export { router }
+function privateAPI(ctx){
+  const user = ctx.state.user
+  ctx.body = {message: `Hello ${user.username} you registered on ${user.dateregistered}`}
+}
+
+router.get('/',publicAPI)
+router.get('/private',auth,privateAPI)
+
+export {router}
