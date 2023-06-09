@@ -4,6 +4,8 @@ import auth from '../controllers/auth'
 import bodyParser from 'koa-bodyparser'
 import * as model from '../models/articles'
 import * as likes from '../models/likes'
+import * as favs from '../models/favs'
+import * as msgs from '../models/msgs'
 
 
 const prefix = '/api/v1/articles'
