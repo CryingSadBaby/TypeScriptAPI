@@ -20,19 +20,37 @@ export async function getByUserId(id){
   return data
 }
 
+async function checkCode(code){
+  const query = 'SELECT code FROM codes WHERE code = ?'
+  const values = [code]
+  const data = await db.run_query(query, values)
+  if(data.length){
+    return true
+  } else {
+    return false
+  }
+}
+
 export async function add(user){
-  let keys = Object.keys(user)
-  const values = Object.values(user)
-  keys = keys.join(',')
-  let parm = ''
-  for(let i=0;i<values.length;i++){parm+='?,'}
-  parm=parm.slice(0,-1)
-  const query = `INSERT INTO users (${keys}) VALUES (${parm})`
-  try{
+  const check = await checkCode(user.code)
+  if(check){
+    let {code,...data} = user
+    let keys = Object.keys(data)
+    let values = Object.values(data)
+    keys = keys.join(',')
+    let parm = ''
+    for(let i=0;i<values.length;i++){parm+='?,'}
+    parm=parm.slice(0,-1)
+    console.log(keys, parm)
+    const query = `INSERT INTO users (${keys}) VALUES (${parm})`
+    try{
     await db.run_query(query, values)
     return {"status":201}
   } catch(error) {
     return error
+    }
+  } else {
+    return {"status":401}
   }
 }
 

@@ -40,6 +40,7 @@ async function login(ctx){
   ctx.body = {id, username, email, avatarurl, role, links}
 }
 
+
 router.get('/', getAll)
 router.get('/:id([0-9]{1,})', getById)
 router.post('/', bodyParser(), createUser)
