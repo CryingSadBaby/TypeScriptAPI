@@ -3,7 +3,7 @@ import * as db from '../helpers/database'
 //add a user Favorite
 export async function addFav (id, uid) {
   const query1 = `SELECT * FROM favs WHERE  articleid=${id} AND userid=${uid}`
-  const query = `INSERT INTO favs (articleID,userID) VALUES (${id},${uid}) ON CONFLICT ON CONSTRAINT  NoDuplicateFav DO NOTHING`
+  const query = `INSERT INTO favs (articleid,userid) VALUES (${id},${uid}) ON CONFLICT ON CONSTRAINT  noduplicatefavs DO NOTHING`
     try{
       const result = await db.run_query(query1, [id, uid])
       if(result!=''){

@@ -130,5 +130,21 @@ async function rmMsg(ctx){
 router.get('/',getAll)
 router.get('/:id([0-9]{1,})', getById)
 router.post('/',bodyParser(),validateArticle,createArticle)
+router.put('/:id([0-9]{1,})',bodyParser(), validateArticle,updateArticle)
+router.del('/:id([0-9]{1,})', deleteArticle)
+
+
+router.get('/:id([0-9]{1,})/likes', likesCount)
+router.post('/:id([0-9]{1,})/likes', auth, likePost)
+router.del('/:id([0-9]{1,})/likes', auth, dislikePost)
+
+router.get('/fav', auth, userFav)
+router.post('/:id([0-9]{1,})/fav', auth, postFav)
+router.del('/:id([0-9]{1,})/fav', auth, rmFav)
+
+
+router.get('/:id([0-9]{1,})/msg', listMsg)
+router.post('/:id([0-9]{1,})/msg', bodyParser(), auth, addMsg)
+router.del('/:id([0-9]{1,})/msg', auth, bodyParser(),rmMsg)
 
 export {router}

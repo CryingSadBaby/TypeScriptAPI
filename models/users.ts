@@ -31,9 +31,20 @@ async function checkCode(code){
   }
 }
 
+async function getRole(code){
+  const query = 'SELECT role FROM codes WHERE code = ?'
+  const values = [code]
+  const data = await db.run_query(query, values)
+  if (data.length){
+    return data
+  }
+}
+
 export async function add(user){
   const check = await checkCode(user.code)
   if(check){
+    const roledata = await getRole(user.code)
+    const role = roledata[0].role
     let {code,...data} = user
     let keys = Object.keys(data)
     let values = Object.values(data)
@@ -42,7 +53,7 @@ export async function add(user){
     for(let i=0;i<values.length;i++){parm+='?,'}
     parm=parm.slice(0,-1)
     console.log(keys, parm)
-    const query = `INSERT INTO users (${keys}) VALUES (${parm})`
+    const query = `INSERT INTO users (${keys},role) VALUES (${parm},'${role}')`
     try{
     await db.run_query(query, values)
     return {"status":201}

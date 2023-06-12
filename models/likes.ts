@@ -21,7 +21,7 @@ export async function like (id,uid){
 
 //remove a like record
 export async function dislike (id, uid) {
-  let query = "DELETE FROM articleslikes WHERE articleID=? AND userID=?; "
+  let query = "DELETE FROM articleslikes WHERE articleid=? AND userid=?; "
    try{
     await db.run_query(query, [id, uid])
     return { "affectedRows":1 }
@@ -33,7 +33,7 @@ export async function dislike (id, uid) {
 
 //count the likes for an article
 export async function count (id) {
-  let query = "SELECT count(1) as likes FROM articleslikes WHERE articleID=?;"
+  let query = "SELECT count(1) as likes FROM articleslikes WHERE articleid=?;"
   const result = await db.run_query(query, [id])
   return result[0].likes
 }

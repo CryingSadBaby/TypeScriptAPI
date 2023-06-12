@@ -13,7 +13,7 @@ export async function add_Msg (id, uid,uname,body) {
   const query = `INSERT INTO msgs (articleid,userid,username,messagetxt) VALUES (${id},${uid},'${uname}','${msg}') `
     try{
       await db.run_query(query, [id, uid,uname,msg])
-      return {"status": 201, "affectedRows":1 }
+      return {"status": 201,"affectedRows":1}
     } catch(error) {
       return error
     }
@@ -25,7 +25,7 @@ export async function add_Msg (id, uid,uname,body) {
 //remove a msg record
 export async function removeMsg (id, body) {
   const msgtxt = body.messagetxt
-  const query = "DELETE FROM msgs WHERE articleID=? AND messagetxt=?; "
+  const query = "DELETE FROM msgs WHERE articleid=? AND messagetxt=?"
    try{
     await db.run_query(query, [id, msgtxt]) 
     return { "affectedRows":1 }
