@@ -4,3 +4,4 @@ node_modules
 .replit
 replit.nix
 src
+routes/helpers/private

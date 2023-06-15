@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "pets": {
+      "id":"/pets",
+      "title":"Pets",
+      "description":"A pet information",
+      "type":"object",
+      "properties": {
+        "petname":{
+          "description":"Pet name",
+          "type":"string"
+        },
+        "des":{
+          "description":"Pet description",
+          "type":"string"
+        },
+        "breed":{
+          "description":"Pet breed",
+          "type":"string"
+        },
+        "age":{
+          "description":"Pet age",
+          "type":"integer"
+        },
+        "gender":{
+          "Description":"Pet gender",
+          "type":"boolean"
+        },
+        "neutered":{
+          "Description":"Pet neutered state",
+          "type":"boolean"
+        },
+        "imageurl":{
+          "Description":"Pet image link",
+          "type":"string"
+        }
+      },
+      "required":["petname","breed","age","gender","neutered"],
+      "additionalProperties": false
+    }
+  }
+}

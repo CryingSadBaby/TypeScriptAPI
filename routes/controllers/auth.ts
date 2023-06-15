@@ -3,4 +3,4 @@ import basicAuth from '../strategies/basic'
 
 passport.use(basicAuth)
 
-export default passport.authenticate(['basic'],{session:false})
+export default passport.authenticate(['basic'], {session:false})

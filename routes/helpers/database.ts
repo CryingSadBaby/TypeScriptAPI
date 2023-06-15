@@ -1,7 +1,8 @@
+//Library
 import { Sequelize, QueryTypes } from "sequelize"
 
 //import database setting
-import { config } from '../private/config'
+import { config } from './private/config'
 
 //function run_query for database query action
 export const run_query = async (query, values) => {
@@ -20,6 +21,7 @@ export const run_query = async (query, values) => {
   }
 }
 
+//function run_insert for database query action
 export const run_insert = async(query, values) => {
   try{
     const sequelize = new Sequelize(`postgres://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`)

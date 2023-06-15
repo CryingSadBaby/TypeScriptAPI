@@ -15,58 +15,56 @@ servers:
 tags:
   - name: Users
     description: API endpoints for user management.
-  - name: Articles
-    description: Access and perform CRUD operations on blog entries.
+  - name: Pets
+    description: Access and perform CRUD operations on web application entries.
 paths:
-  /articles/{id}:
+  /api/v1/pets/{id}:
     parameters:
       - in: path
         name: id
         schema:
           type: integer
         required: true
-        description: Numeric id of the articles
+        description: Numeric id of the pets
     get:
       tags:
-        - Articles
-      description:
-        Get articles by id.
-      responses:
+        - Pets
+      description: Get pet by id.
+      response:
         '200':
-          description: View of articles 
+          description: View of pets
         '404':
-          description: Articles was not found in the DB.
+          description: Pets is not found in the database
     post:
       tags:
-        - Articles
+        - Pets
       description:
-        Create a new article.
+        Post a new pet.
       requestBody:
-        description: All new article data.
+        description: All pet data.
         required: true
         content:
           application/json:
             schema:
-              $ref: ./article.json#/definitions/article
+              $ref: ./pets.json#/definitions/pets
       responses:
         '201':
-          description: User created
-
+          description: Posted pets
     put:
       tags:
-        - Articles
-      description: Update articles by ID.
+        - Pets
+      description: Update pet by id
       responses:
         '200':
           description: Update confirmation and link to record.
         '404':
-          description: Articles was not found in the DB.
+          description: Pet was not Found in database.
     delete:
       tags:
-        - Articles
-      description: Delete articles by ID.
-    responses:
+        - Pets
+      description: Delete pet by id
+      responses:
         '200':
           description: Delete confirmation.
         '404':
-          description: Articles was not found in the DB.
+          description: Pet was not Found in dabase
