@@ -62,12 +62,18 @@ export const del = async(id:Number) => {
 export const search = async(cat)=>{
   const keys = Object.keys(cat)
   const values = Object.values(cat)
-  for(let v=0;v<values.length;v++){values[v]=`%${values[v]}%`}
+  let query = ''
   let p = ''
   for(let i=0;i<values.length;i++){p+='?,'}
   p = p.slice(0,-1)
-  
-  const query = `SELECT * FROM pets WHERE (${keys}) ILIKE (${p})`
+  if(typeof(values[0])=='boolean'){
+    query = `SELECT * FROM pets WHERE (${keys}) IN (${p})`
+  }else if(Number.isInteger(values[0])){
+    query = `SELECT * FROM pets WHERE (${keys}) IN (${p})`
+  }else {
+    for(let v=0;v<values.length;v++){values[v]=`%${values[v]}%`}
+    query = `SELECT * FROM pets WHERE (${keys}) ILIKE (${p})`
+  }
   const data = await db.run_query(query,values)
   return data
 }
