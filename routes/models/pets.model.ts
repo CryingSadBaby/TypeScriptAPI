@@ -70,6 +70,8 @@ export const search = async(cat)=>{
     query = `SELECT * FROM pets WHERE (${keys}) IN (${p})`
   }else if(Number.isInteger(values[0])){
     query = `SELECT * FROM pets WHERE (${keys}) IN (${p})`
+  }else if(values[0]==null){
+    query = `SELECT * FROM pets`
   }else {
     for(let v=0;v<values.length;v++){values[v]=`%${values[v]}%`}
     query = `SELECT * FROM pets WHERE (${keys}) ILIKE (${p})`
