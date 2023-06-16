@@ -67,7 +67,7 @@ export const search = async(cat)=>{
   for(let i=0;i<values.length;i++){p+='?,'}
   p = p.slice(0,-1)
   
-  const query = `SELECT * FROM pets WHERE (${keys}) LIKE (${p})`
+  const query = `SELECT * FROM pets WHERE (${keys}) ILIKE (${p})`
   const data = await db.run_query(query,values)
   return data
 }

@@ -65,7 +65,6 @@ const search = async(ctx: RouterContext) => {
   if(result){
     ctx.status = 201
     ctx.body = result
-    console.log(result)
   }
 }
 
