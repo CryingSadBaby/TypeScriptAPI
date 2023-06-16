@@ -58,11 +58,23 @@ const del = async(ctx: RouterContex) => {
   }
 }
 
+//Search cat from database
+const search = async(ctx: RouterContext) => {
+  const data = ctx.request.body
+  const result = await pets.search(data)
+  if(result){
+    ctx.status = 201
+    ctx.body = result
+    console.log(result)
+  }
+}
+
 //Routes
 router.get('/',all)
 router.get('/:id([0-9]{1,})',byid)
 router.post('/',bodyParser(),auth,add)
 router.put('/:id([0-9]{1,})',bodyParser(),auth,update)
 router.del('/:id([0-9]{1,})',auth,del)
+router.post('/search',bodyParser(),search)
 
 export {router}

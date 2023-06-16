@@ -57,3 +57,17 @@ export const del = async(id:Number) => {
     return err
   }
 }
+
+//Search cat information
+export const search = async(cat)=>{
+  const keys = Object.keys(cat)
+  const values = Object.values(cat)
+  for(let v=0;v<values.length;v++){values[v]=`%${values[v]}%`}
+  let p = ''
+  for(let i=0;i<values.length;i++){p+='?,'}
+  p = p.slice(0,-1)
+  
+  const query = `SELECT * FROM pets WHERE (${keys}) LIKE (${p})`
+  const data = await db.run_query(query,values)
+  return data
+}
