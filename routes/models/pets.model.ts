@@ -11,7 +11,7 @@ export const all = async() => {
 //Get cat by id function
 export const byid = async(id: number) => {
   const query = `SELECT * FROM pets WHERE id = ${id}`
-  const data = await db.run_query(query,)
+  const data = await db.run_query(query)
   return data
 }
 
