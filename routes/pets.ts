@@ -29,8 +29,9 @@ const byid = async(ctx: RouterContext) => {
 
 //Post a cat information
 const add = async(ctx: RouterContext) => {
+  const uid = ctx.state.user.id
   const data = ctx.request.body
-  const result = await pets.add(data)
+  const result = await pets.add(data,uid)
   if(result){
     ctx.status=201
     ctx.body=result
@@ -41,10 +42,11 @@ const add = async(ctx: RouterContext) => {
 const update = async(ctx: RouterContext) => {
   const data = ctx.request.body
   const id = ctx.params.id
-  const result = await pets.update(data,id)
+  const uid = ctx.state.user.id
+  const result = await pets.update(data,id,uid)
   if(result){
     ctx.status = 201
-    ctx.body = `Pets with id: ${id} updated`
+    ctx.body = {message: `Pets with id: ${id} updated`}
   }
 }
 

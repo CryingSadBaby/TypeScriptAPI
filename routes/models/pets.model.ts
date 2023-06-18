@@ -16,14 +16,15 @@ export const byid = async(id: number) => {
 }
 
 //Post cat function
-export const add = async(cat) => {
+export const add = async(cat,uid) => {
   const keys=Object.keys(cat).join(',')
   const values=Object.values(cat)
   let p = ''
   for(let i=0;i<values.length;i++){p+='?,'}
   p = p.slice(0,-1)
-  const query = `INSERT INTO pets (${keys}) VALUES (${p})`
+  const query = `INSERT INTO pets (${keys},userid) VALUES (${p},?)`
   try{
+    values.push(uid)
     await db.run_query(query,values)
     return {"status":201}
   } catch(err) {
@@ -32,13 +33,13 @@ export const add = async(cat) => {
 }
 
 //Update cat information function
-export const update = async(cat,id:Number) => {
+export const update = async(cat,id:Number,uid:Number) => {
   const keys=Object.keys(cat)
   const values=Object.values(cat)
   let p = ''
   for(let i=0;i<values.length;i++){p+=keys[i]+"='"+values[i]+"',"}
   p=p.slice(0,-1)
-  const query = `UPDATE pets SET ${p} WHERE id=${id} RETURNING *`
+  const query = `UPDATE pets SET ${p} WHERE id=${id} AND userid = ${uid} RETURNING *`
   try{
     await db.run_query(query,values)
     return {"status":201}
