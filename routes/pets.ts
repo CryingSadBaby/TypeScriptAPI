@@ -14,7 +14,11 @@ const router = new Router({prefix:prefixlist.pets})
 const all = async(ctx: RouterContext) => {
   const result = await pets.all()
   if(result.length){
+    ctx.status= 201
     ctx.body=result
+  }else{
+    ctx.status= 201
+    ctx.body= []
   }
 }
 
@@ -23,6 +27,7 @@ const byid = async(ctx: RouterContext) => {
   const id = ctx.params.id
   const result = await pets.byid(id)
   if(result.length){
+    ctx.status=201
     ctx.body=result[0]
   }
 }
@@ -64,9 +69,12 @@ const del = async(ctx: RouterContex) => {
 const search = async(ctx: RouterContext) => {
   const data = ctx.request.body
   const result = await pets.search(data)
-  if(result){
+  if(result.length){
     ctx.status = 201
     ctx.body = result
+  }else{
+    ctx.status = 201
+    ctx.body = []
   }
 }
 
